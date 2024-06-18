@@ -1,9 +1,9 @@
 import request from "@/utils/request";
 
-export const getList = (params: any) => {
+export const getUserList = (params: any) => {
   return request({
-    url: "/api/list",
-    method: "post",
+    url: "/api/getUserList",
+    method: "get",
     params,
   });
 };

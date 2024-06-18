@@ -1,4 +1,4 @@
-import { getList } from "@/api";
+import { getUserList } from "@/api";
 import { useState } from "react";
 import "./App.css";
 import reactLogo from "./assets/react.svg";
@@ -6,10 +6,12 @@ import viteLogo from "/vite.svg";
 
 function App() {
   const [count, setCount] = useState(0);
+  const [userList, setUserList] = useState<any[]>([]);
 
   const handlePrimary = async () => {
-    const res = await getList({ query: 123 });
+    const res = await getUserList({ query: 123 });
     console.log("[ res ] >", res);
+    setUserList(res.data);
   };
   return (
     <>
@@ -37,6 +39,11 @@ function App() {
         Primary
       </button>
       <button className="btn btn-secondary">Secondary</button>
+      <div>
+        {userList.map((user) => (
+          <p key={user.id}>{user.name}</p>
+        ))}
+      </div>
     </>
   );
 }
