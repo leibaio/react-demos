@@ -41,7 +41,7 @@ function App() {
       <button className="btn btn-secondary">Secondary</button>
       <div>
         {userList.map((user) => (
-          <p key={user.id}>{user.name}</p>
+          <p key={user.id}>{user.name}-{user.email}</p>
         ))}
       </div>
     </>
