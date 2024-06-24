@@ -11,8 +11,8 @@ const Home = () => {
   };
 
   return (
-    <div>
-      Home page
+    <>
+      <div>Home page</div>
       <button className="btn btn-primary" onClick={handlePrimary}>
         Primary
       </button>
@@ -24,7 +24,7 @@ const Home = () => {
           </p>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 
