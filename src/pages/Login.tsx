@@ -1,4 +1,4 @@
-import { Button, Form, Input, Checkbox } from "antd";
+import { Button, Form, Input, Checkbox, message } from "antd";
 import { login } from "@/api";
 
 const Login = () => {
@@ -14,8 +14,8 @@ const Login = () => {
 
   const handleLogin = async () => {
     const values = await form.validateFields();
-    console.log("[ values ] >", values);
-    await login(values);
+    const res = await login(values);
+    console.log("[ res ] >", res);
   };
 
   return (

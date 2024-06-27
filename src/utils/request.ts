@@ -1,6 +1,7 @@
 // utils/request.ts
 
 import axios from 'axios';
+import { message } from 'antd';
 
 // 创建 axios 实例
 const request = axios.create({
@@ -33,6 +34,8 @@ request.interceptors.response.use(
   },
   error => {
     // 响应错误处理，例如弹出错误提示
+    const errorMessage = error.response?.data?.message || '请求出错';
+    message.error(errorMessage);
     return Promise.reject(error);
   }
 );
