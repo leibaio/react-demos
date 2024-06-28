@@ -16,12 +16,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 
   const login = async (email: string, password: string) => {
-    const res = await loginApi({ email, password });
-    if (res.data.code == 200) {
+    const res: any = await loginApi({ email, password });
+    if (res.code == 200) {
       setIsLoggedIn(true);
-      localStorage.setItem("authToken", res.data.data.token);
+      localStorage.setItem("authToken", res.data.token);
     }
-    message.success(res.data.msg);
+    message.success(res.msg);
   };
 
   const logout = () => {

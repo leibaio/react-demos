@@ -5,9 +5,9 @@ const Home = () => {
   const [userList, setUserList] = useState<any[]>([]);
 
   const handlePrimary = async () => {
-    const res = await getUserList({ query: 123 });
-    console.log("[ res ] >", res);
-    setUserList(res.data);
+    const { data } = await getUserList({ query: 123 });
+    console.log("[ data ] >", data);
+    setUserList(data.userList);
   };
 
   return (

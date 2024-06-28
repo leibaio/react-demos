@@ -30,7 +30,7 @@ request.interceptors.request.use(
 request.interceptors.response.use(
   response => {
     // 根据业务需求处理响应数据
-    return response;
+    return response.data;
   },
   error => {
     // 响应错误处理，例如弹出错误提示

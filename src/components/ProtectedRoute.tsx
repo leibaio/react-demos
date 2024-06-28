@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { message } from "antd";
+import { useEffect } from "react";
 
 interface ProtectedRouteProps {
   element: React.ComponentType<any>;
@@ -14,8 +15,13 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
 }) => {
   const { isLoggedIn } = useAuth();
 
+  useEffect(() => {
+    if (!isLoggedIn) {
+      message.warning("您未登录，请先登录！");
+    }
+  }, [isLoggedIn]);
+
   if (!isLoggedIn) {
-    message.warning("您未登录，请先登录！");
     return <Navigate to="/login" />;
   }
 

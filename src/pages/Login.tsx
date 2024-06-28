@@ -18,6 +18,7 @@ const Login = () => {
   const handleLogin = async () => {
     const values = await form.validateFields();
     await login(values.email, values.password);
+    navigate("/home");
   };
 
   return (
