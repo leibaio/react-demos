@@ -1,12 +1,15 @@
-import { Button, Form, Input, Checkbox, message } from "antd";
-import { login } from "@/api";
+import { useAuth } from "@/contexts/AuthContext";
+import { Button, Checkbox, Form, Input } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [form] = Form.useForm();
+  const { login } = useAuth();
   const layout = {
     labelCol: { span: 6 },
     wrapperCol: { span: 18 },
   };
+  const navigate = useNavigate();
 
   const onRememberMe = (e: any) => {
     console.log("[ e ] >", e);
@@ -14,8 +17,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     const values = await form.validateFields();
-    const res = await login(values);
-    console.log("[ res ] >", res);
+    await login(values.email, values.password);
   };
 
   return (

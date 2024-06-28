@@ -30,11 +30,11 @@ request.interceptors.request.use(
 request.interceptors.response.use(
   response => {
     // 根据业务需求处理响应数据
-    return response.data;
+    return response;
   },
   error => {
     // 响应错误处理，例如弹出错误提示
-    const errorMessage = error.response?.data?.message || '请求出错';
+    const errorMessage = error.response.data.msg || '请求出错';
     message.error(errorMessage);
     return Promise.reject(error);
   }

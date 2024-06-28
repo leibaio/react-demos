@@ -1,6 +1,6 @@
 import request from "@/utils/request";
 
-export const login = (data: any) => {
+export const loginApi = (data: any) => {
   return request({
     url: "/api/login",
     method: "post",
