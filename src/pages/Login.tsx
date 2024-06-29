@@ -1,5 +1,5 @@
 import { useAuth } from "@/contexts/AuthContext";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, notification } from "antd";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -9,6 +9,7 @@ const Login = () => {
     labelCol: { span: 6 },
     wrapperCol: { span: 18 },
   };
+
   const navigate = useNavigate();
 
   const onRememberMe = (e: any) => {
@@ -17,7 +18,8 @@ const Login = () => {
 
   const handleLogin = async () => {
     const values = await form.validateFields();
-    await login(values.email, values.password);
+    const userInfo: any = await login(values.email, values.password);
+    notification.success({ message: `欢迎回来, ${userInfo?.name}` });
     navigate("/home");
   };
 
@@ -28,6 +30,10 @@ const Login = () => {
           className="p-8 bg-white rounded-lg shadow-md w-96"
           form={form}
           {...layout}
+          initialValues={{
+            email: "admin",
+            password: "123456",
+          }}
         >
           <h2 className="text-2xl font-bold text-center mb-8">登录</h2>
           <Form.Item
