@@ -6,14 +6,12 @@ const Home = () => {
   const [userList, setUserList] = useState<any[]>([]);
   const { userInfo } = useAuth();
 
-  useEffect(() => {}, []);
+  useEffect(() => {}, [userInfo]);
 
   const handlePrimary = async () => {
     const { data } = await getUserList({ query: 123 });
-    console.log("[ data ] >", data);
     setUserList(data.userList);
   };
-  // todo token 校验是谁
 
   return (
     <>

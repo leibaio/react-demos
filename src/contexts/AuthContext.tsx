@@ -1,5 +1,11 @@
 import { loginApi } from "@/api";
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
 
 interface AuthContextType {
   isLoggedIn: boolean;
@@ -19,6 +25,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     email: string;
   } | null>(null);
 
+  useEffect(() => {
+    const storedUserInfo = localStorage.getItem("userInfo");
+    if (storedUserInfo) {
+      setUserInfo(JSON.parse(storedUserInfo));
+    }
+  }, []);
+
   const login = async (email: string, password: string) => {
     const res: any = await loginApi({ email, password });
     if (res.code == 200) {
@@ -29,6 +42,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         email: res.data.userInfo.email,
       };
       setUserInfo(user);
+      localStorage.setItem("userInfo", JSON.stringify(user));
       return user;
     }
     return null;
