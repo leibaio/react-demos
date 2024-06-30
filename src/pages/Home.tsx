@@ -2,6 +2,8 @@ import { getUserList } from "@/api";
 import { useAuth } from "@/contexts/AuthContext";
 import { useEffect, useState } from "react";
 
+// TODO 添加路由菜单 结构配置
+
 const Home = () => {
   const [userList, setUserList] = useState<any[]>([]);
   const { userInfo } = useAuth();

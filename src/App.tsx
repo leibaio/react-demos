@@ -1,7 +1,5 @@
-import ProtectedRoute from "@/components/ProtectedRoute";
 import { AuthProvider } from "@/contexts/AuthContext";
-import Home from "@/pages/Home";
-import Login from "@/pages/Login";
+import routes from "@/routes";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 const App = () => {
@@ -9,8 +7,18 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/home" element={<ProtectedRoute element={Home} />} />
-          <Route path="/login" element={<Login />} />
+          {routes.map((route, index) => (
+            <Route key={index} path={route.path} element={route.element}>
+              {route.children &&
+                route.children.map((childRoute, childIndex) => (
+                  <Route
+                    key={childIndex}
+                    path={childRoute.path}
+                    element={childRoute.element}
+                  />
+                ))}
+            </Route>
+          ))}
         </Routes>
       </Router>
     </AuthProvider>
