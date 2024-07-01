@@ -46,7 +46,8 @@ const CommonLayout = () => {
     <Layout style={{ minHeight: "100vh" }}>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="logo">
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="logo" style={{ height: "32px" }} />
+          {collapsed ? null : <span>react-demos</span>}
         </div>
         <Menu
           theme="dark"
