@@ -14,6 +14,11 @@ const menuConfig = [
     icon: React.createElement(UserOutlined),
     label: "关于",
   },
+  {
+    key: "/expanding-cards",
+    icon: React.createElement(UserOutlined),
+    label: "展开卡片",
+  },
   // {
   //   key: "/user-list",
   //   icon: UserOutlined,

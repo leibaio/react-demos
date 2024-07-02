@@ -1,9 +1,10 @@
 import CommonLayout from "@/components/Layout/CommonLayout";
+import ProtectedRoute from "@/components/ProtectedRoute";
+import ExpandingCards from "@/pages/50projects50days/01-expanding-cards";
 import About from "@/pages/About";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import { Navigate } from "react-router-dom";
-import ProtectedRoute from "@/components/ProtectedRoute";
 
 const routes = [
   { path: "/", element: <Navigate to="/home" /> },
@@ -17,6 +18,11 @@ const routes = [
     path: "/about",
     element: <CommonLayout />,
     children: [{ path: "", element: <About /> }],
+  },
+  {
+    path: "/expanding-cards",
+    element: <CommonLayout />,
+    children: [{ path: "", element: <ExpandingCards /> }],
   },
 ];
 
