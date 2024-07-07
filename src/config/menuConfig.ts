@@ -1,5 +1,5 @@
 import {
-  UserOutlined,
+  UserOutlined, CoffeeOutlined
 } from "@ant-design/icons";
 import React from "react";
 
@@ -18,6 +18,11 @@ const menuConfig = [
     key: "/expanding-cards",
     icon: React.createElement(UserOutlined),
     label: "展开卡片",
+  },
+  {
+    key: "/metro",
+    icon: React.createElement(CoffeeOutlined),
+    label: "地铁",
   },
   // {
   //   key: "/user-list",
