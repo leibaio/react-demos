@@ -5,6 +5,7 @@ import About from "@/pages/About";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import Metro from "@/pages/metro";
+import WatermarkDemo from "@/pages/watermark";
 import { Navigate } from "react-router-dom";
 
 const routes = [
@@ -19,6 +20,11 @@ const routes = [
     path: "/metro",
     element: <ProtectedRoute element={CommonLayout} />,
     children: [{ path: "", element: <Metro /> }],
+  },
+  {
+    path: "/watermark",
+    element: <ProtectedRoute element={CommonLayout} />,
+    children: [{ path: "", element: <WatermarkDemo /> }],
   },
   {
     path: "/about",

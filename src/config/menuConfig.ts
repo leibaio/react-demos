@@ -24,6 +24,11 @@ const menuConfig = [
     icon: React.createElement(CoffeeOutlined),
     label: "地铁",
   },
+  {
+    key: "/watermark",
+    icon: React.createElement(CoffeeOutlined),
+    label: "水印",
+  },
   // {
   //   key: "/user-list",
   //   icon: UserOutlined,
