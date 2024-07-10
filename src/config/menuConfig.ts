@@ -29,6 +29,11 @@ const menuConfig = [
     icon: React.createElement(CoffeeOutlined),
     label: "水印",
   },
+  {
+    key: "/reader",
+    icon: React.createElement(CoffeeOutlined),
+    label: "阅读器",
+  },
   // {
   //   key: "/user-list",
   //   icon: UserOutlined,

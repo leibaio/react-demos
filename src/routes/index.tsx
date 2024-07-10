@@ -5,12 +5,23 @@ import About from "@/pages/About";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import Metro from "@/pages/metro";
+import Reader from "@/pages/reader";
 import WatermarkDemo from "@/pages/watermark";
 import { Navigate } from "react-router-dom";
 
 const routes = [
   { path: "/", element: <Navigate to="/home" /> },
   { path: "/login", element: <Login /> },
+  {
+    path: "/about",
+    element: <CommonLayout />,
+    children: [{ path: "", element: <About /> }],
+  },
+  {
+    path: "/expanding-cards",
+    element: <CommonLayout />,
+    children: [{ path: "", element: <ExpandingCards /> }],
+  },
   {
     path: "/home",
     element: <ProtectedRoute element={CommonLayout} />,
@@ -22,19 +33,14 @@ const routes = [
     children: [{ path: "", element: <Metro /> }],
   },
   {
+    path: "/reader",
+    element: <CommonLayout />,
+    children: [{ path: "", element: <Reader /> }],
+  },
+  {
     path: "/watermark",
     element: <ProtectedRoute element={CommonLayout} />,
     children: [{ path: "", element: <WatermarkDemo /> }],
-  },
-  {
-    path: "/about",
-    element: <CommonLayout />,
-    children: [{ path: "", element: <About /> }],
-  },
-  {
-    path: "/expanding-cards",
-    element: <CommonLayout />,
-    children: [{ path: "", element: <ExpandingCards /> }],
   },
 ];
 
