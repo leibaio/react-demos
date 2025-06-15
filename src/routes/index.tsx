@@ -8,6 +8,7 @@ import Metro from "@/pages/metro";
 import Reader from "@/pages/reader";
 import WatermarkDemo from "@/pages/watermark";
 import { Navigate } from "react-router-dom";
+import Demo from "@/pages/Demo";
 
 const routes = [
   { path: "/", element: <Navigate to="/home" /> },
@@ -16,6 +17,11 @@ const routes = [
     path: "/about",
     element: <CommonLayout />,
     children: [{ path: "", element: <About /> }],
+  },
+  {
+    path: "/demo",
+    element: <CommonLayout />,
+    children: [{ path: "", element: <Demo /> }],
   },
   {
     path: "/expanding-cards",
