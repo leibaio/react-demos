@@ -1,10 +1,20 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Demo = () => {
   console.log("Demo 组件正在重新渲染...");
 
   const [count, setCount] = useState(0); // 用于触发组件重新渲染，但不影响 useMemo 的依赖
   const [dataItems, setDataItems] = useState([10, 20, 30]); // useMemo 的依赖项
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("[ 路由发生变化 ] >", location);
+  }, [location]);
+
+  console.log("[ location,navigate ] >", location, navigate);
 
   // useMemo 示例
   // useMemo 记忆化一个计算结果
