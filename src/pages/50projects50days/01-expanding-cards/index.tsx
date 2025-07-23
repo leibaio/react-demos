@@ -3,6 +3,8 @@ import "./index.less";
 const ExpandingCards = () => {
   const panels = document.querySelectorAll(".panel");
 
+  console.log("[ 1 ] >", 1);
+
   panels.forEach((panel) => {
     panel.addEventListener("click", () => {
       removeActiveClasses();
