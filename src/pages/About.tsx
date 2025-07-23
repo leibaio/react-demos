@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { Button } from "antd";
 
 const About = () => {
+  console.log("[ 3 ] >", 3);
   const [count, setCount] = useState(10);
   const timerRef = useRef(null);
 
