@@ -3,6 +3,7 @@ import { Button } from "antd";
 
 const About = () => {
   console.log("[ 3 ] >", 3);
+  console.log("[ 4 ] >", 4);
   const [count, setCount] = useState(10);
   const timerRef = useRef(null);
 
