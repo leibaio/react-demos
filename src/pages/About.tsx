@@ -4,6 +4,7 @@ import { Button } from "antd";
 const About = () => {
   const [count, setCount] = useState(10);
   const timerRef = useRef(null);
+  console.log("[ 1 ] >", 1);
 
   const [person, setPerson] = useState({
     name: "John",
