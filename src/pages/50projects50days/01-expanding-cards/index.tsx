@@ -4,6 +4,7 @@ const ExpandingCards = () => {
   const panels = document.querySelectorAll(".panel");
 
   console.log("[ 1 ] >", 1);
+  console.log("[ 2 ] >", 2);
 
   panels.forEach((panel) => {
     panel.addEventListener("click", () => {
