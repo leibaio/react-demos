@@ -1,0 +1,122 @@
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px;
+  height: 64px;
+  overflow: hidden;
+  white-space: nowrap;
+
+  img {
+    height: 32px;
+    width: 32px;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    border-radius: 16%;
+  }
+
+  span {
+    margin-left: 8px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    flex-shrink: 0;
+  }
+}
+
+// 侧边栏收起状态
+.ant-layout-sider-collapsed .logo {
+  justify-content: center;
+
+  span {
+    opacity: 0;
+    transform: translateX(-10px);
+    width: 0;
+    margin-left: 0;
+    overflow: hidden;
+  }
+}
+
+// 确保 Sider 的过渡效果
+.ant-layout-sider {
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
+
+  // 防止滚动条闪烁
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
+// 菜单项的过渡优化
+.ant-menu-inline {
+  border-right: none !important;
+
+  .ant-menu-item,
+  .ant-menu-submenu {
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+  }
+
+  .ant-menu-item-icon {
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    font-size: 16px;
+  }
+
+  .ant-menu-item-selected {
+    background-color: #1890ff !important;
+
+    &::after {
+      display: none;
+    }
+  }
+}
+
+// 主布局区域的过渡
+.site-layout {
+  .ant-layout-header {
+    display: flex;
+    align-items: center;
+    height: 64px;
+    line-height: 64px;
+  }
+
+  .ant-layout-content {
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+}
+
+// 响应式处理
+@media (max-width: 768px) {
+  .ant-layout-sider {
+    position: fixed !important;
+    z-index: 999;
+    height: 100vh;
+  }
+
+  .site-layout {
+    margin-left: 0 !important;
+  }
+
+  .logo span {
+    display: none;
+  }
+}

@@ -1,17 +1,37 @@
+import type {
+  ApiResponse,
+  GetUserListParams,
+  LoginRequest,
+  LoginResponse,
+} from "@/types";
 import request from "@/utils/request";
 
-export const loginApi = (data: any) => {
+/**
+ * 用户登录
+ * @param data 登录参数
+ * @returns 登录响应
+ */
+export const loginApi = (
+  data: LoginRequest
+): Promise<ApiResponse<LoginResponse>> => {
   return request({
     url: "/api/login",
-    method: "post",
+    method: "POST",
     data,
   });
 };
 
-export const getUserList = (params: any) => {
+/**
+ * 获取用户列表
+ * @param params 查询参数
+ * @returns 用户列表响应
+ */
+export const getUserList = (
+  params: GetUserListParams
+): Promise<ApiResponse> => {
   return request({
-    url: "/api/getUserList",
-    method: "get",
+    url: "/api/user/list",
+    method: "GET",
     params,
   });
 };

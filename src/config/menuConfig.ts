@@ -1,6 +1,4 @@
-import {
-  UserOutlined, CoffeeOutlined
-} from "@ant-design/icons";
+import { UserOutlined, CoffeeOutlined } from "@ant-design/icons";
 import React from "react";
 
 const menuConfig = [
@@ -13,26 +11,6 @@ const menuConfig = [
     key: "/about",
     icon: React.createElement(UserOutlined),
     label: "关于",
-  },
-  {
-    key: "/expanding-cards",
-    icon: React.createElement(UserOutlined),
-    label: "展开卡片",
-  },
-  {
-    key: "/metro",
-    icon: React.createElement(CoffeeOutlined),
-    label: "地铁",
-  },
-  {
-    key: "/watermark",
-    icon: React.createElement(CoffeeOutlined),
-    label: "水印",
-  },
-  {
-    key: "/reader",
-    icon: React.createElement(CoffeeOutlined),
-    label: "阅读器",
   },
   {
     key: "/demo",
@@ -54,7 +32,6 @@ const menuConfig = [
   //     },
   //   ],
   // },
-
 ];
 
 export default menuConfig;
