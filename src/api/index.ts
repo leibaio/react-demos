@@ -15,7 +15,7 @@ export const loginApi = (
   data: LoginRequest
 ): Promise<ApiResponse<LoginResponse>> => {
   return request({
-    url: "/api/login",
+    url: "/login",
     method: "POST",
     data,
   });
@@ -30,7 +30,7 @@ export const getUserList = (
   params: GetUserListParams
 ): Promise<ApiResponse> => {
   return request({
-    url: "/api/user/list",
+    url: "/user/page",
     method: "GET",
     params,
   });
