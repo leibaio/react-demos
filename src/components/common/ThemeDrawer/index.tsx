@@ -50,6 +50,7 @@ const ThemeDrawer = () => {
       <FloatButton
         icon={<SettingOutlined />}
         type="primary"
+        className="theme-float-btn"
         style={{ right: 24, bottom: 120 }}
         onClick={() => setOpen(true)}
       />

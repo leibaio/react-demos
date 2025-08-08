@@ -16,6 +16,8 @@ export interface RouteMeta {
   roles?: string[];
   hidden?: boolean;
   keepAlive?: boolean;
+  breadcrumb?: boolean;
+  affix?: boolean;
 }
 
 // 菜单项类型
@@ -26,10 +28,23 @@ export interface MenuItem {
   path?: string;
   children?: MenuItem[];
   disabled?: boolean;
+  hidden?: boolean;
+  roles?: string[];
+  badge?: string | number;
+  target?: "_blank" | "_self";
+  divider?: boolean;
 }
 
 // 面包屑项类型
 export interface BreadcrumbItem {
   title: string;
   path?: string;
+  icon?: ReactNode;
+}
+
+// 菜单权限配置
+export interface MenuPermission {
+  menuKey: string;
+  roles: string[];
+  permissions: string[];
 }

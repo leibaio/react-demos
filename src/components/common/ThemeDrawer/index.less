@@ -212,6 +212,22 @@
       border-color: var(--ant-primary-color-hover) !important;
     }
   }
+
+  // 主题浮动按钮样式
+  .theme-float-btn.ant-float-btn-primary .ant-float-btn-body {
+    background-color: var(--ant-primary-color) !important;
+    border-color: var(--ant-primary-color) !important;
+
+    &:hover {
+      background-color: var(--ant-primary-color-hover) !important;
+      border-color: var(--ant-primary-color-hover) !important;
+    }
+
+    &:focus {
+      background-color: var(--ant-primary-color) !important;
+      border-color: var(--ant-primary-color) !important;
+    }
+  }
 }
 
 // 全局主题色 CSS 变量更新
@@ -225,4 +241,24 @@
 [data-theme="dark"] {
   --ant-primary-color-bg: rgba(24, 144, 255, 0.2);
   --ant-primary-color-bg-hover: rgba(24, 144, 255, 0.3);
+}
+
+// 主题浮动按钮样式
+.theme-float-btn.ant-float-btn-primary .ant-float-btn-body {
+  background-color: var(--ant-primary-color) !important;
+  border-color: var(--ant-primary-color) !important;
+
+  &:hover {
+    background-color: var(--ant-primary-color-hover) !important;
+    border-color: var(--ant-primary-color-hover) !important;
+  }
+
+  &:focus {
+    background-color: var(--ant-primary-color) !important;
+    border-color: var(--ant-primary-color) !important;
+  }
+
+  .ant-float-btn-icon {
+    color: #fff !important;
+  }
 }
