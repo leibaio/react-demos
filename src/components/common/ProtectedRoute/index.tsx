@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuthStore } from "@/stores";
 import { message } from "antd";
 import { useEffect } from "react";
 
@@ -8,12 +8,11 @@ interface ProtectedRouteProps {
   [rest: string]: any;
 }
 
-// 创建一个受保护的路由组件
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   element: Component,
   ...rest
 }) => {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn } = useAuthStore();
 
   useEffect(() => {
     if (!isLoggedIn) {

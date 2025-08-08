@@ -17,13 +17,31 @@
 
   span {
     margin-left: 8px;
-    color: #fff;
     font-size: 16px;
     font-weight: 500;
     opacity: 1;
     transform: translateX(0);
     transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
     flex-shrink: 0;
+  }
+}
+
+// 浅色模式下的 logo 样式
+.ant-layout-sider-light .logo {
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+
+  span {
+    color: #333;
+  }
+}
+
+// 深色模式下的 logo 样式
+.ant-layout-sider-dark .logo {
+  background: #001529;
+
+  span {
+    color: #fff;
   }
 }
 
@@ -44,21 +62,43 @@
 .ant-layout-sider {
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) !important;
 
-  // 防止滚动条闪烁
-  &::-webkit-scrollbar {
-    width: 6px;
+  // 浅色模式滚动条
+  &.ant-layout-sider-light {
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.06);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 3px;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.3);
+      }
+    }
   }
 
-  &::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-  }
+  // 深色模式滚动条
+  &.ant-layout-sider-dark {
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
 
-  &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 3px;
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
 
-    &:hover {
-      background: rgba(255, 255, 255, 0.5);
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 3px;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.5);
+      }
     }
   }
 }
@@ -70,10 +110,6 @@
   .ant-menu-item,
   .ant-menu-submenu {
     transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.1) !important;
-    }
   }
 
   .ant-menu-item-icon {
@@ -81,11 +117,49 @@
     font-size: 16px;
   }
 
-  .ant-menu-item-selected {
-    background-color: #1890ff !important;
+  // 浅色模式菜单项
+  &.ant-menu-light {
+    .ant-menu-item,
+    .ant-menu-submenu {
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.06) !important;
+      }
+    }
 
-    &::after {
-      display: none;
+    .ant-menu-item-selected {
+      background-color: var(--ant-primary-color-bg) !important;
+      color: var(--ant-primary-color) !important;
+
+      &::after {
+        display: none;
+      }
+
+      .ant-menu-item-icon {
+        color: var(--ant-primary-color) !important;
+      }
+    }
+  }
+
+  // 深色模式菜单项
+  &.ant-menu-dark {
+    .ant-menu-item,
+    .ant-menu-submenu {
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+      }
+    }
+
+    .ant-menu-item-selected {
+      background-color: var(--ant-primary-color) !important;
+      color: #fff !important;
+
+      &::after {
+        display: none;
+      }
+
+      .ant-menu-item-icon {
+        color: #fff !important;
+      }
     }
   }
 }
@@ -97,10 +171,24 @@
     align-items: center;
     height: 64px;
     line-height: 64px;
+    transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
 
   .ant-layout-content {
     transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+}
+
+// Header 按钮样式优化
+.header-toggle-btn {
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.06) !important;
+  }
+}
+
+.header-toggle-btn-dark {
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
   }
 }
 
