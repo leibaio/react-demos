@@ -1,4 +1,5 @@
-import { useState, useMemo, useEffect } from "react";
+import { Button } from "antd";
+import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Demo = () => {
@@ -49,16 +50,16 @@ const Demo = () => {
       <p>原始数据：{JSON.stringify(dataItems)}</p>
       <p>双倍数据（通过 useMemo 计算）: {JSON.stringify(doubledItems)}</p>
 
-      <button className="btn btn-xs mr-2" onClick={handleAddCount}>
+      <Button size="small" onClick={handleAddCount} style={{ marginRight: 8 }}>
         增加计数（不触发 useMemo 重新计算）
-      </button>
-      {/* <button className="btn btn-xs" onClick={handleAddCount2}>
+      </Button>
+      {/* <Button size="small" onClick={handleAddCount2}>
         增加计数（不触发 useMemo 重新计算）
-      </button> */}
+      </Button> */}
 
-      <button className="btn btn-xs" onClick={handleAddDateItem}>
+      <Button size="small" onClick={handleAddDateItem}>
         增加数据项（触发 useMemo 计算）
-      </button>
+      </Button>
     </>
   );
 };

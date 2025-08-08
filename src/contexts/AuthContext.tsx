@@ -1,16 +1,17 @@
 import { loginApi } from "@/api";
+import type { UserInfo } from "@/types";
 import {
   createContext,
   ReactNode,
   useContext,
-  useState,
   useEffect,
+  useState,
 } from "react";
 
 interface AuthContextType {
   isLoggedIn: boolean;
-  userInfo: { name: string; email: string } | null;
-  login: (email: string, password: string) => void;
+  userInfo: UserInfo | null;
+  login: (username: string, password: string) => Promise<UserInfo | null>;
   logout: () => void;
 }
 
@@ -20,10 +21,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(
     !!localStorage.getItem("authToken")
   );
-  const [userInfo, setUserInfo] = useState<{
-    name: string;
-    email: string;
-  } | null>(null);
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
 
   useEffect(() => {
     const storedUserInfo = localStorage.getItem("userInfo");
@@ -32,24 +30,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const login = async (email: string, password: string) => {
-    const res: any = await loginApi({ email, password });
-    if (res.code == 200) {
-      setIsLoggedIn(true);
-      localStorage.setItem("authToken", res.data.token);
-      const user = {
-        name: res.data.userInfo.name,
-        email: res.data.userInfo.email,
-      };
-      setUserInfo(user);
-      localStorage.setItem("userInfo", JSON.stringify(user));
-      return user;
+  const login = async (
+    username: string,
+    password: string
+  ): Promise<UserInfo | null> => {
+    try {
+      const res = await loginApi({ username, password });
+      if (res.success) {
+        setIsLoggedIn(true);
+        localStorage.setItem("authToken", res.data.token);
+        const user = res.data.userInfo;
+        setUserInfo(user);
+        localStorage.setItem("userInfo", JSON.stringify(user));
+        return user;
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
     }
     return null;
   };
 
   const logout = () => {
-    // 实现登出逻辑
+    setIsLoggedIn(false);
+    setUserInfo(null);
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("userInfo");
   };
 
   return (

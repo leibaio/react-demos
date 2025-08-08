@@ -19,10 +19,10 @@ const Home = () => {
     <>
       <div>Home page</div>
       <h1>Hi,{userInfo?.name}</h1>
-      <button className="btn btn-primary" onClick={handlePrimary}>
+      <Button type="primary" onClick={handlePrimary} style={{ marginRight: 8 }}>
         Primary
-      </button>
-      <button className="btn btn-secondary">Secondary</button>
+      </Button>
+      <Button>Secondary</Button>
       <div>
         {userList.map((user) => (
           <p key={user._id}>
