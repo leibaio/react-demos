@@ -7,8 +7,8 @@ import { mainRoutes } from "./modules/main";
 // 合并所有路由配置
 const routes: RouteConfig[] = [
   { path: "/", element: <Navigate to="/home" replace /> },
-  ...authRoutes,
   ...mainRoutes,
+  ...authRoutes,
   ...demoRoutes,
 ];
 

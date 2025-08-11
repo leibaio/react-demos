@@ -1,11 +1,11 @@
 import logo from "@/assets/logo.svg";
-import menuConfig from "@/config/menuConfig";
+import routes from "@/routes";
+import { useAuthStore, useThemeStore } from "@/stores";
+import type { RouteConfig } from "@/types/route";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Button, ConfigProvider, Layout, Menu, theme } from "antd";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { useAuthStore, useThemeStore } from "../../../stores";
 import "./index.less";
-import { MenuItem } from "../../../types/route";
 
 const { Header, Content, Sider } = Layout;
 
@@ -16,108 +16,102 @@ const CommonLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const renderMenuItems = (menuItems: MenuItem[]): any[] => {
-    return menuItems
-      .filter((item) => !item.hidden) // 过滤隐藏菜单
-      .map((item: MenuItem) => {
-        // 如果有子菜单
-        if (item.children && item.children.length > 0) {
-          const visibleChildren = item.children.filter(
-            (child) => !child.hidden
-          );
+  const getMenuFromRoutes = (routes: RouteConfig[], parentPath = ""): any => {
+    return routes
+      .filter((route) => route.meta && !route.meta.hidden)
+      .map((route) => {
+        // 拼接完整路径
+        const fullPath = route.path.startsWith("/")
+          ? route.path
+          : `${parentPath}/${route.path}`.replace(/\/+/g, "/");
 
-          // 如果所有子菜单都被隐藏，则不显示父菜单
-          if (visibleChildren.length === 0) {
-            return null;
-          }
-
-          return {
-            key: item.key,
-            icon: item.icon,
-            label: item.label,
-            disabled: item.disabled,
-            children: renderMenuItems(item.children),
-          };
-        }
-
-        // 叶子菜单项
-        return {
-          key: item.key,
-          icon: item.icon,
-          label: item.label,
-          disabled: item.disabled,
+        const menuItem: any = {
+          key: fullPath,
+          icon: route.meta?.icon,
+          label: route.meta?.title,
+          path: fullPath,
         };
-      })
-      .filter(Boolean); // 移除 null 值
+
+        if (route.children && route.children.length > 0) {
+          const children = getMenuFromRoutes(route.children, fullPath);
+          if (children.length > 0) {
+            menuItem.children = children;
+          }
+        }
+
+        return menuItem;
+      });
   };
 
-  const menuItems = renderMenuItems(menuConfig);
+  const menuItems = getMenuFromRoutes(routes);
 
-  const handleMenuClick = ({ key }: { key: string }) => {
-    // 查找菜单项对应的路径
-    const findMenuPath = (
-      items: MenuItem[],
-      targetKey: string
-    ): string | null => {
-      for (const item of items) {
-        if (item.key === targetKey && item.path) {
-          return item.path;
-        }
-        if (item.children) {
-          const childPath = findMenuPath(item.children, targetKey);
-          if (childPath) return childPath;
-        }
-      }
-      return null;
-    };
-
-    const path = findMenuPath(menuConfig, key);
-    if (path) {
-      navigate(path);
-    }
+  const handleMenuClick = (info: { key: string }) => {
+    navigate(info.key);
   };
 
-  // 获取当前选中的菜单项
+  // 从 routes 里获取当前选中的菜单 key
   const getSelectedKeys = (): string[] => {
     const findSelectedKey = (
-      items: MenuItem[],
-      currentPath: string
+      items: RouteConfig[],
+      currentPath: string,
+      parentPath = ""
     ): string | null => {
       for (const item of items) {
-        if (item.path === currentPath) {
-          return item.key;
+        if (item.meta?.hidden) continue;
+
+        // 拼接完整路径
+        const fullPath =
+          item.path.startsWith("/") || !parentPath
+            ? item.path
+            : `${parentPath}/${item.path}`;
+
+        if (fullPath === currentPath) {
+          return item.path; // 或者用 route.key
         }
+
         if (item.children) {
-          const childKey = findSelectedKey(item.children, currentPath);
+          const childKey = findSelectedKey(
+            item.children,
+            currentPath,
+            fullPath
+          );
           if (childKey) return childKey;
         }
       }
       return null;
     };
 
-    const selectedKey = findSelectedKey(menuConfig, location.pathname);
+    const selectedKey = findSelectedKey(routes, location.pathname);
     return selectedKey ? [selectedKey] : [];
   };
 
-  // 获取展开的菜单项
+  // 获取展开的菜单 keys
   const getOpenKeys = (): string[] => {
     const openKeys: string[] = [];
 
     const findOpenKeys = (
-      items: MenuItem[],
+      items: RouteConfig[],
       targetPath: string,
-      parentKeys: string[] = []
+      parentKeys: string[] = [],
+      parentPath = ""
     ): boolean => {
       for (const item of items) {
-        const currentKeys = [...parentKeys, item.key];
+        if (item.meta?.hidden) continue;
 
-        if (item.path === targetPath) {
+        const fullPath =
+          item.path.startsWith("/") || !parentPath
+            ? item.path
+            : `${parentPath}/${item.path}`;
+
+        const currentKeys = [...parentKeys, item.path];
+
+        if (fullPath === targetPath) {
           openKeys.push(...parentKeys);
           return true;
         }
 
         if (item.children) {
-          if (findOpenKeys(item.children, targetPath, currentKeys)) {
+          if (findOpenKeys(item.children, targetPath, currentKeys, fullPath)) {
             return true;
           }
         }
@@ -125,7 +119,7 @@ const CommonLayout = () => {
       return false;
     };
 
-    findOpenKeys(menuConfig, location.pathname);
+    findOpenKeys(routes, location.pathname);
     return openKeys;
   };
 

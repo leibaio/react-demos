@@ -3,15 +3,16 @@ import { ReactNode } from "react";
 // 路由配置类型
 export interface RouteConfig {
   path: string;
-  element: ReactNode;
+  element?: ReactNode;
   children?: RouteConfig[];
   meta?: RouteMeta;
+  key?: string;
 }
 
 // 路由元信息
 export interface RouteMeta {
   title?: string;
-  icon?: string;
+  icon?: ReactNode;
   requireAuth?: boolean;
   roles?: string[];
   hidden?: boolean;

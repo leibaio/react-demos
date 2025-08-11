@@ -8,6 +8,7 @@ const Login = lazy(() => import("@/pages/auth/login"));
 export const authRoutes: RouteConfig[] = [
   {
     path: "/login",
+    key: "login",
     element: <Login />,
     meta: {
       title: "登录",
