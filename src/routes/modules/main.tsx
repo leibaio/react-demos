@@ -1,7 +1,8 @@
 import ProtectedRoute from "@/components/common/ProtectedRoute";
 import CommonLayout from "@/components/layout/CommonLayout";
 import { RouteConfig } from "@/types/route";
-import { lazy } from "react";
+import { HomeOutlined, InfoCircleOutlined } from "@ant-design/icons";
+import React, { lazy } from "react";
 
 // 懒加载主要页面
 const Home = lazy(() => import("@/pages/home"));
@@ -11,21 +12,23 @@ const About = lazy(() => import("@/pages/about"));
 export const mainRoutes: RouteConfig[] = [
   {
     path: "/home",
+    key: "home",
     element: <ProtectedRoute element={CommonLayout} />,
     children: [{ path: "", element: <Home /> }],
     meta: {
       title: "首页",
-      icon: "home",
+      icon: React.createElement(HomeOutlined),
       requireAuth: true,
     },
   },
   {
     path: "/about",
+    key: "about",
     element: <CommonLayout />,
     children: [{ path: "", element: <About /> }],
     meta: {
       title: "关于",
-      icon: "info-circle",
+      icon: React.createElement(InfoCircleOutlined),
       requireAuth: false,
     },
   },

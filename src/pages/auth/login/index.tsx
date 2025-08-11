@@ -1,10 +1,10 @@
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuthStore } from "@/stores";
 import { Button, Checkbox, Form, Input, notification } from "antd";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [form] = Form.useForm();
-  const { login } = useAuth();
+  const { login } = useAuthStore();
   const layout = {
     labelCol: { span: 6 },
     wrapperCol: { span: 18 },
@@ -19,8 +19,10 @@ const Login = () => {
   const handleLogin = async () => {
     const values = await form.validateFields();
     const userInfo: any = await login(values.email, values.password);
-    notification.success({ message: `欢迎回来, ${userInfo?.name}` });
-    navigate("/home");
+    if (userInfo) {
+      notification.success({ message: `欢迎回来, ${userInfo?.name}` });
+      navigate("/home");
+    }
   };
 
   return (
