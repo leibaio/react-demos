@@ -1,6 +1,7 @@
 // 导出所有类型定义
 export * from "./api";
 export * from "./route";
+export * from "./user";
 
 // 通用类型定义
 export interface BaseEntity {

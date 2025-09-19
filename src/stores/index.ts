@@ -1,3 +1,3 @@
-export { useThemeStore } from "./themeStore";
-export { useAuthStore } from "./authStore";
-export type { LayoutType, ThemeMode } from "./themeStore";
+export { useThemeStore } from "./theme";
+export { useAuthStore } from "./auth";
+export type { LayoutType, ThemeMode } from "./theme";

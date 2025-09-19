@@ -3,7 +3,7 @@ export interface ApiResponse<T = any> {
   code: number;
   message: string;
   data: T;
-  success: boolean;
+  timestamp: number;
 }
 
 // 分页响应类型
@@ -19,19 +19,6 @@ export interface LoginRequest {
   username: string;
   password: string;
   remember?: boolean;
-}
-
-export interface LoginResponse {
-  token: string;
-  userInfo: UserInfo;
-}
-
-export interface UserInfo {
-  id: string;
-  username: string;
-  email?: string;
-  avatar?: string;
-  roles: string[];
 }
 
 // 用户列表查询参数
