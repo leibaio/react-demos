@@ -8,7 +8,7 @@ import type {
 import request from "@/utils/request";
 
 const Api = {
-  Login: "/api/user/login",
+  Login: "/api/auth/login",
   QueryByPage: "/api/user/queryByPage",
   Create: "/api/user/create",
 };

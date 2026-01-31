@@ -8,6 +8,7 @@ import {
   InfoCircleOutlined,
   SettingOutlined,
   TeamOutlined,
+  CommentOutlined,
 } from "@ant-design/icons";
 import React from "react";
 
@@ -17,6 +18,12 @@ const menuConfig: MenuItem[] = [
     label: "首页",
     icon: React.createElement(HomeOutlined),
     path: "/home",
+  },
+  {
+    key: "/chat",
+    label: "AI 对话",
+    icon: React.createElement(CommentOutlined),
+    path: "/chat",
   },
   {
     key: "/dashboard",
